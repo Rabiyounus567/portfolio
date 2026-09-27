@@ -1,0 +1,54 @@
+/* Mobile screen ke liye responsive settings */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* Agar koi main container ya section hai */
+  .container, section {
+    width: 100% !important;
+    padding: 5px !important;
+    margin: 0 !important;
+  }
+
+  /* Gallery ya images ko mobile par ek ke niche ek adjust karne ke liye */
+  .gallery, .image-grid, img {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+  }
+}
+/* Mobile screen ke liye navigation menu ko theek karne ka code */
+@media (max-width: 768px) {
+  nav, .nav-menu, header nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 0;
+  }
+  
+  nav a, .nav-menu a {
+    font-size: 13px !important;
+    padding: 5px 8px !important;
+  }
+}
+/* Mobile screen ke liye navigation menu ko theek karne ka code */
+@media (max-width: 768px) {
+  nav, .nav-menu, header nav {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 8px; 
+    padding: 10px 0;
+  }
+  
+  nav a, .nav-menu a {
+    font-size: 12px !important; 
+    padding: 4px 6px !important; 
+  }
+}
