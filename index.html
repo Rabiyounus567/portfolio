@@ -1,4 +1,3 @@
-HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,12 +5,16 @@ HTML
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Rabia Younus — Educator & Event Facilitator</title>
-    <style>:root {
-            --primary: #4f46e5;
-            --secondary: #db2777;
-            --accent: #f59e0b;
-            --text-color: #1f2937;
-            --card-bg: #ffffff;
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --secondary: #22d3ee;
+            --accent: #f472b6;
+            --text-color: #d7dbee;
+            --muted: #93a0c2;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-border: rgba(139, 92, 246, 0.25);
+            --heading-color: #f4f2ff;
         }
         * {
             margin: 0;
@@ -20,22 +23,125 @@ HTML
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth;
         }
-        /* Clean, Elegant & Modern Solid / Soft Background */
+        /* Animated Dark Neon Gradient Background */
         body {
-            background-color: #f8fafc;
+            background: linear-gradient(120deg, #0a0d16, #140f24, #0b1a22, #0a0d16);
+            background-size: 400% 400%;
+            animation: gradientFlow 18s ease infinite;
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
+        }
+        @keyframes gradientFlow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Animated Neon Orbs */
+        .bg-balls {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .bg-balls span {
+            position: absolute;
+            display: block;
+            border-radius: 50%;
+            filter: blur(3px);
+            opacity: 0.65;
+            animation: floatBall linear infinite;
+        }
+        .bg-balls span:nth-child(1) { width: 90px;  height: 90px;  left: 8%;  background: #8b5cf6; box-shadow: 0 0 60px 10px #8b5cf6; animation-duration: 22s; animation-delay: 0s; }
+        .bg-balls span:nth-child(2) { width: 130px; height: 130px; left: 22%; background: #22d3ee; box-shadow: 0 0 70px 12px #22d3ee; animation-duration: 28s; animation-delay: -4s; }
+        .bg-balls span:nth-child(3) { width: 60px;  height: 60px;  left: 38%; background: #f472b6; box-shadow: 0 0 50px 10px #f472b6; animation-duration: 18s; animation-delay: -8s; }
+        .bg-balls span:nth-child(4) { width: 100px; height: 100px; left: 55%; background: #8b5cf6; box-shadow: 0 0 60px 10px #8b5cf6; animation-duration: 26s; animation-delay: -2s; }
+        .bg-balls span:nth-child(5) { width: 75px;  height: 75px;  left: 68%; background: #22d3ee; box-shadow: 0 0 55px 10px #22d3ee; animation-duration: 20s; animation-delay: -10s; }
+        .bg-balls span:nth-child(6) { width: 110px; height: 110px; left: 80%; background: #f472b6; box-shadow: 0 0 65px 12px #f472b6; animation-duration: 30s; animation-delay: -6s; }
+        .bg-balls span:nth-child(7) { width: 50px;  height: 50px;  left: 92%; background: #8b5cf6; box-shadow: 0 0 45px 8px #8b5cf6; animation-duration: 16s; animation-delay: -12s; }
+        .bg-balls span:nth-child(8) { width: 85px;  height: 85px;  left: 48%; background: #22d3ee; box-shadow: 0 0 55px 10px #22d3ee; animation-duration: 24s; animation-delay: -14s; }
+
+        @keyframes floatBall {
+            0%   { transform: translateY(110vh) scale(0.8); opacity: 0; }
+            10%  { opacity: 0.65; }
+            50%  { transform: translateY(45vh) scale(1.1); }
+            90%  { opacity: 0.65; }
+            100% { transform: translateY(-15vh) scale(0.8); opacity: 0; }
+        }
+
+        header, main, section, footer { position: relative; z-index: 1; }
+
+        /* Scroll reveal transitions */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .grid-3 .card.reveal,
+        .gallery-grid .gallery-item.reveal {
+            transition-delay: var(--delay, 0s);
+        }
+
+        /* Smooth nav link underline transition */
+        nav a {
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            box-shadow: 0 0 8px var(--secondary);
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Smoother global transitions on interactive elements */
+        .btn, .skill-badge, .gallery-item img, .card {
+            transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+        }
+        .skill-badge:hover {
+            transform: translateY(-3px);
+            border-color: var(--secondary);
+            box-shadow: 0 0 18px rgba(34, 211, 238, 0.35);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body { animation: none; }
+            .bg-balls span { animation: none; display: none; }
+            .reveal { opacity: 1; transform: none; transition: none; }
         }
 
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            background: rgba(10, 13, 22, 0.55);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.25);
+            border-radius: 0 0 18px 18px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        header.scrolled {
+            background: rgba(10, 13, 22, 0.85);
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.18);
         }
         .nav-container {
             max-width: 1100px;
@@ -51,14 +157,17 @@ HTML
             display: flex;
             align-items: center;
             gap: 8px;
-            color: #4f46e5;
+            color: var(--secondary);
+            text-shadow: 0 0 12px rgba(34, 211, 238, 0.5);
         }
         .logo span {
-            background: #4f46e5;
-            color: white;
+            background: linear-gradient(120deg, #8b5cf6, #22d3ee);
+            backdrop-filter: blur(4px);
+            color: #ffffff;
             padding: 2px 8px;
             border-radius: 6px;
             font-size: 0.9rem;
+            text-shadow: none;
         }
         nav ul {
             display: flex;
@@ -73,6 +182,7 @@ HTML
         }
         nav a:hover {
             color: var(--secondary);
+            text-shadow: 0 0 10px rgba(34, 211, 238, 0.6);
         }
         section {
             padding: 7rem 1rem 4rem 1rem;
@@ -92,17 +202,26 @@ HTML
             height: 190px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 3px solid rgba(139, 92, 246, 0.6);
+            box-shadow: 0 0 45px rgba(139, 92, 246, 0.45);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .avatar-img:hover {
+            transform: scale(1.06) rotate(-2deg);
+            box-shadow: 0 0 60px rgba(34, 211, 238, 0.55);
         }
         .hero h1 {
             font-size: 3.2rem;
-            color: #1e293b;
             font-weight: 800;
+            background: linear-gradient(90deg, #8b5cf6, #22d3ee 50%, #f472b6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 0 18px rgba(139, 92, 246, 0.35));
         }
         .hero p {
             font-size: 1.3rem;
-            color: #64748b;
+            color: var(--muted);
             max-width: 650px;
             font-weight: 400;
         }
@@ -112,28 +231,35 @@ HTML
             margin-top: 1rem;
         }
         .btn {
-            background: #4f46e5;
+            background: linear-gradient(120deg, #8b5cf6, #6d28d9);
             color: white;
             padding: 0.85rem 2rem;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
-            transition: transform 0.3s;
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.45);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
         .btn:hover {
             transform: translateY(-3px);
+            box-shadow: 0 0 35px rgba(139, 92, 246, 0.7);
         }
         .btn-secondary {
-            background: #db2777;
-            box-shadow: 0 4px 15px rgba(219, 39, 119, 0.3);
+            background: linear-gradient(120deg, #22d3ee, #0e7490);
+            box-shadow: 0 0 25px rgba(34, 211, 238, 0.4);
+        }
+        .btn-secondary:hover {
+            box-shadow: 0 0 35px rgba(34, 211, 238, 0.65);
         }
         h2 {
             font-size: 2.3rem;
             margin-bottom: 2.5rem;
             text-align: center;
             font-weight: 800;
-            color: #1e293b;
+            background: linear-gradient(90deg, #c4b5fd, #67e8f9);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         .grid-3 {
             display: grid;
@@ -141,21 +267,25 @@ HTML
             gap: 2rem;
         }
         .card {
-            background: #ffffff;
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             padding: 2.5rem 2rem;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            border: 1px solid #e2e8f0;
-            transition: transform 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            border: 1px solid var(--card-border);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border-color: rgba(34, 211, 238, 0.55);
+            box-shadow: 0 15px 40px rgba(34, 211, 238, 0.18);
         }
         .card h3 {
             margin-bottom: 1rem;
-            color: #4f46e5;
+            color: var(--secondary);
             font-size: 1.4rem;
+            text-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
         }
         .gallery-grid {
             display: grid;
@@ -165,9 +295,15 @@ HTML
         .gallery-item {
             overflow: hidden;
             border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            transition: border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+        .gallery-item:hover {
+            border-color: rgba(244, 114, 182, 0.5);
+            box-shadow: 0 8px 28px rgba(244, 114, 182, 0.2);
         }
         .gallery-item img {
             width: 100%;
@@ -178,6 +314,74 @@ HTML
         .gallery-item img:hover {
             transform: scale(1.05);
         }
+        .cert-item .cert-caption {
+            padding: 0.9rem 1rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            text-align: center;
+        }
+        .cert-item img {
+            height: 260px;
+            object-fit: contain;
+            background: #12162a;
+            padding: 0.5rem;
+        }
+
+        /* CV single page display */
+        .cv-single-wrap {
+            max-width: 620px;
+            margin: 0 auto;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--card-border);
+            padding: 20px;
+            transition: border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+        .cv-single-wrap:hover {
+            border-color: rgba(34, 211, 238, 0.5);
+            box-shadow: 0 15px 40px rgba(34, 211, 238, 0.18);
+        }
+        .cv-single-img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .cv-single-wrap:hover .cv-single-img {
+            transform: scale(1.015);
+        }
+
+        /* Contact links */
+        .contact-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        .contact-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+            transition: width 0.3s ease;
+        }
+        .contact-link:hover {
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(244, 114, 182, 0.6);
+        }
+        .contact-link:hover::after {
+            width: 100%;
+        }
+
         .skills-list {
             display: flex;
             flex-wrap: wrap;
@@ -185,24 +389,33 @@ HTML
             justify-content: center;
         }
         .skill-badge {
-            background: #ffffff;
-            color: #4f46e5;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            color: var(--secondary);
             padding: 0.7rem 1.4rem;
             border-radius: 30px;
             font-weight: 600;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border: 1px solid var(--card-border);
         }
         footer {
             text-align: center;
             padding: 3rem 1rem;
-            background: #1e293b;
-            color: white;
+            background: #05070d;
+            color: var(--muted);
             margin-top: 5rem;
+            border-top: 1px solid rgba(139, 92, 246, 0.2);
+            transition: background 0.4s ease;
         }
     </style>
 </head>
 <body>
+
+    <!-- Animated floating balls (behind all content) -->
+    <div class="bg-balls">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+    </div>
 
     <!-- Header & Navigation -->
     <header>
@@ -214,6 +427,7 @@ HTML
                     <li><a href="#services">Services</a></li>
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#certificates">Certificates</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -223,7 +437,7 @@ HTML
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <img src="/images/avatar.jpg" alt="Rabia Avatar" class="avatar-img">
+        <img src="images/avatar.jpg" alt="Rabia Avatar" class="avatar-img">
         <h1>Rabia Younus</h1>
         <p>Dedicated Teacher & Event Organizer | 6 Years Home Tutoring, 2 Years Teaching & 5 Years Event Management Experience.</p>
         <div class="btn-group">
@@ -242,11 +456,11 @@ HTML
    <!-- Resume Section -->
     <section id="resume" style="text-align: center; padding: 40px 20px;">
         <h2>My Resume</h2>
-        <div class="card" style="max-width: 800px; margin: 0 auto; background: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-            <img src="images/resume.jpg" alt=" Resume" style="width: 100%; height: auto; border-radius: 8px;">
-            <br><br>
-            <a href="images/resume.jpg" class="btn" target="_blank" download>Download Resume Image</a>
+        <div class="cv-single-wrap">
+            <img src="images/resume.jpg" alt="Rabia Younus Resume" loading="lazy" class="cv-single-img">
         </div>
+        <br>
+        <a href="images/resume.jpg" class="btn" target="_blank" download>Download Resume Image</a>
     </section>
 
     <!-- What I Do / Services -->
@@ -312,6 +526,43 @@ HTML
             <div class="gallery-item"><img src="images/workshop2.jpg" alt="Gallery Image 16"></div>
         </div>
     </section>
+    <!-- Certificates Section -->
+    <section id="certificates">
+        <h2>Certificates & Training 🎓</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item cert-item">
+                <a href="images/cert-saylani-web-app.jpg" target="_blank">
+                    <img src="images/cert-saylani-web-app.jpg" alt="Saylani IT Training - Modern Web & App Development Certificate">
+                </a>
+                <p class="cert-caption">Saylani IT Training — Modern Web & App Development</p>
+            </div>
+            <div class="gallery-item cert-item">
+                <a href="images/cert-saylani-batch15.jpg" target="_blank">
+                    <img src="images/cert-saylani-batch15.jpg" alt="Saylani ICT Training - Web and Mobile App Development Certificate">
+                </a>
+                <p class="cert-caption">Saylani ICT Training — Web & Mobile App Development</p>
+            </div>
+            <div class="gallery-item cert-item">
+                <a href="images/cert-montessori.jpg" target="_blank">
+                    <img src="images/cert-montessori.jpg" alt="London Montessori International Certificate of Acknowledgment">
+                </a>
+                <p class="cert-caption">London Montessori International — Certificate of Acknowledgment</p>
+            </div>
+            <div class="gallery-item cert-item">
+                <a href="images/cert-content-writing.jpg" target="_blank">
+                    <img src="images/cert-content-writing.jpg" alt="NS Training Content Writing Certificate">
+                </a>
+                <p class="cert-caption">NS Training — Content Writing Course Completion</p>
+            </div>
+            <div class="gallery-item cert-item">
+                <a href="images/cert-ns-experience-letter.jpg" target="_blank">
+                    <img src="images/cert-ns-experience-letter.jpg" alt="NS Training Experience Letter">
+                </a>
+                <p class="cert-caption">NS Training — Experience Letter</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Skills Section -->
     <section id="skills">
         <h2>Skills & Expertise</h2>
@@ -333,9 +584,9 @@ HTML
         <div class="card" style="text-align: center; max-width: 600px; margin: 0 auto;">
             <p>Let's connect for teaching opportunities or event collaborations!</p><br>
             <!-- Clickable Email -->
-            <p><strong>Email:</strong> <a href="mailto:rabia.younus2018@gmail.com" style="color: #7c3aed; text-decoration: none; font-weight: bold;">rabia.younus2018@gmail.com</a></p><br>
+            <p><strong>Email:</strong> <a href="mailto:rabia.younus2018@gmail.com" class="contact-link">rabia.younus2018@gmail.com</a></p><br>
             <!-- Clickable Phone / WhatsApp -->
-            <p><strong>Phone / WhatsApp:</strong> <a href="tel:+923333744862" style="color: #7c3aed; text-decoration: none; font-weight: bold;">+92 3333744862</a></p>
+            <p><strong>Phone / WhatsApp:</strong> <a href="tel:+923333744862" class="contact-link">+92 3333744862</a></p>
         </div>
     </section>
 
@@ -343,6 +594,45 @@ HTML
     <footer>
         <p>&copy; 2026 Rabia Younus. All Rights Reserved.</p>
     </footer>
+
+    <!-- Scroll-reveal transitions -->
+    <script>
+        (function () {
+            var header = document.querySelector('header');
+            function onScroll() {
+                if (window.scrollY > 30) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            var targets = document.querySelectorAll(
+                'section .card, .gallery-item, .skills-list, .hero h1, .hero p, .hero .btn-group, section > h2'
+            );
+            targets.forEach(function (el, i) {
+                el.classList.add('reveal');
+                el.style.setProperty('--delay', (i % 6) * 0.08 + 's');
+            });
+
+            if ('IntersectionObserver' in window) {
+                var observer = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+                targets.forEach(function (el) { observer.observe(el); });
+            } else {
+                targets.forEach(function (el) { el.classList.add('visible'); });
+            }
+        })();
+    </script>
 
 </body>
 </html>
